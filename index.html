@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio de Montage Vidéo</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#003D17", secondary: "#00591F" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      @font-face {
+      font-family: 'Crunch Chips';
+      src: url('https://readdy.ai/api/search-image?query=font%2520placeholder&width=1&height=1&seq=font1&orientation=squarish');
+      font-weight: normal;
+      font-style: normal;
+      }
+      body {
+      font-family: 'Rubik', sans-serif;
+      background-color: #003D17;
+      background-image: radial-gradient(circle at 50% 50%, rgba(0, 89, 31, 0.7) 0%, rgba(0, 61, 23, 0.9) 70%);
+      position: relative;
+      overflow-x: hidden;
+      }
+      body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://readdy.ai/api/search-image?query=dark%2520green%2520cave%2520with%2520subtle%2520light%2520rays%2520coming%2520through%2520the%2520ceiling%252C%2520mysterious%2520atmosphere%252C%2520slightly%2520foggy%252C%2520natural%2520texture%252C%2520organic%2520feel%252C%2520cinematic%2520lighting%252C%2520high%2520quality%2520render%252C%2520moody%2520atmosphere%252C%2520film%2520grain&width=1920&height=1080&seq=bg1&orientation=landscape');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.15;
+      z-index: -1;
+      }
+      .title-animation {
+      animation: float 6s ease-in-out infinite;
+      text-shadow: 0 0 15px rgba(0, 255, 85, 0.3);
+      }
+      @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+      }
+      .card {
+      background: rgba(0, 25, 10, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(0, 255, 85, 0.1);
+      transition: all 0.3s ease;
+      }
+      .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(0, 255, 85, 0.2);
+      }
+      .video-card {
+      transition: all 0.3s ease;
+      position: relative;
+      }
+      .video-card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 255, 85, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      }
+      .video-card:hover {
+      transform: scale(1.03);
+      }
+      .video-card:hover::after {
+      opacity: 1;
+      }
+      .glow-text {
+      text-shadow: 0 0 10px rgba(0, 255, 85, 0.5);
+      }
+      .crunch-chips {
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 2px;
+      }
+      .btn-contact {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      }
+      .btn-contact::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 85, 0.2), transparent);
+      transition: all 0.5s ease;
+      }
+      .btn-contact:hover::before {
+      left: 100%;
+      }
+      .grain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://readdy.ai/api/search-image?query=subtle%2520film%2520grain%2520texture%252C%2520very%2520light%2520and%2520minimal%252C%2520barely%2520visible%252C%2520transparent%2520background&width=200&height=200&seq=grain1&orientation=squarish');
+      opacity: 0.05;
+      pointer-events: none;
+      z-index: 100;
+      }
+      input:focus, button:focus {
+      outline: none;
+      }
+      .price-tag {
+      position: relative;
+      overflow: hidden;
+      }
+      .price-tag::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 255, 85, 0.1) 0%, transparent 100%);
+      z-index: -1;
+      }
+      .light-beam {
+      position: absolute;
+      width: 150px;
+      height: 500px;
+      background: linear-gradient(to bottom, rgba(0, 255, 85, 0.05), transparent);
+      transform: rotate(45deg);
+      filter: blur(20px);
+      animation: moveBeam 15s infinite alternate ease-in-out;
+      z-index: -1;
+      }
+      @keyframes moveBeam {
+      0% { left: -5%; top: -20%; }
+      100% { left: 90%; top: 30%; }
+      }
+    </style>
+  </head>
+  <body class="min-h-screen text-white">
+    <div class="grain"></div>
+    <div class="light-beam"></div>
+    <div class="light-beam" style="animation-delay: -7s;"></div>
+    <header class="py-6">
+      <div class="container mx-auto px-6 flex justify-between items-center">
+        <div class="text-2xl font-['Pacifico'] text-green-300">Shinzo</div>
+        <nav class="hidden md:flex space-x-8">
+          <a href="#youtube" class="hover:text-green-300 transition-colors"
+            >YouTube</a
+          >
+          <a href="#services" class="hover:text-green-300 transition-colors"
+            >Services</a
+          >
+          <a href="#experience" class="hover:text-green-300 transition-colors"
+            >Expérience</a
+          >
+          <a href="#contact" class="hover:text-green-300 transition-colors"
+            >Contact</a
+          >
+        </nav>
+        <button class="md:hidden w-10 h-10 flex items-center justify-center">
+          <i class="ri-menu-line ri-lg"></i>
+        </button>
+      </div>
+    </header>
+    <main>
+      <section class="py-20 relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center">
+          <h1
+            class="crunch-chips title-animation text-6xl md:text-8xl font-bold mb-6 text-green-300"
+          >
+            JE SUIS MONTEUR !
+          </h1>
+          <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-80 mb-10">
+            Monteur vidéo professionnel avec une passion pour la création de
+            contenu captivant
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <a
+              href="#portfolio"
+              class="btn-contact bg-green-600 hover:bg-green-500 text-white px-8 py-3 !rounded-button whitespace-nowrap font-medium"
+              >Voir mes projets</a
+            >
+            <a
+              href="#contact"
+              class="btn-contact bg-transparent border border-green-500 hover:border-green-400 text-green-300 px-8 py-3 !rounded-button whitespace-nowrap font-medium"
+              >Me contacter</a
+            >
+          </div>
+        </div>
+      </section>
+      <section id="youtube" class="py-16 relative">
+        <div class="container mx-auto px-6">
+          <h2
+            class="crunch-chips text-4xl md:text-5xl font-bold mb-12 text-center text-green-300 glow-text"
+          >
+            MA CHAÎNE YOUTUBE
+          </h2>
+          <div class="max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 gap-8">
+              <div
+                class="video-card rounded-lg overflow-hidden shadow-xl cursor-pointer"
+                onclick="window.open('https://www.youtube.com/watch?v=pR1ZA0zG1FE', '_blank')"
+              >
+                <div class="aspect-video bg-black relative">
+                  <iframe
+                    class="w-full h-full pointer-events-none"
+                    src="https://www.youtube.com/embed/pR1ZA0zG1FE"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+              <div
+                class="video-card rounded-lg overflow-hidden shadow-xl cursor-pointer"
+                onclick="window.open('https://www.youtube.com/watch?v=fIkLQ1K33Lc', '_blank')"
+              >
+                <div class="aspect-video bg-black relative">
+                  <iframe
+                    class="w-full h-full pointer-events-none"
+                    src="https://www.youtube.com/embed/fIkLQ1K33Lc"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+              <div
+                class="video-card rounded-lg overflow-hidden shadow-xl cursor-pointer"
+                onclick="window.open('https://www.youtube.com/watch?v=eqyEOZ9Rj2Y', '_blank')"
+              >
+                <div class="aspect-video bg-black relative">
+                  <iframe
+                    class="w-full h-full pointer-events-none"
+                    src="https://www.youtube.com/embed/eqyEOZ9Rj2Y"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                  ></iframe>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="card p-6">
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="ri-youtube-line ri-2x text-red-500"></i>
+                  <h3 class="text-2xl font-semibold">Dernières Vidéos</h3>
+                </div>
+                <p class="text-gray-300">
+                  Découvrez mes créations les plus récentes sur ma chaîne
+                  YouTube. Des montages gaming aux effets spéciaux, en passant
+                  par des éditions créatives.
+                </p>
+              </div>
+              <div class="card p-6">
+                <div class="flex items-center gap-4 mb-4">
+                  <i class="ri-video-line ri-2x text-green-300"></i>
+                  <h3 class="text-2xl font-semibold">Contenu Varié</h3>
+                </div>
+                <p class="text-gray-300">
+                  Je propose différents types de contenus : gaming, vlogs,
+                  tutoriels et plus encore. Chaque vidéo est montée avec soin et
+                  créativité.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="services" class="py-16 relative">
+        <div class="container mx-auto px-6">
+          <h2
+            class="crunch-chips text-4xl md:text-5xl font-bold mb-12 text-center text-green-300 glow-text"
+          >
+            MES SERVICES
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="card rounded-lg p-6 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-16 h-16 flex items-center justify-center mb-4 bg-green-900 rounded-full"
+              >
+                <i class="ri-vidicon-line ri-xl"></i>
+              </div>
+              <h3 class="text-2xl font-semibold mb-3">Short / TikTok</h3>
+              <p class="mb-4 text-gray-300">
+                Montages courts et dynamiques optimisés pour les plateformes
+                sociales
+              </p>
+              <div class="mt-auto">
+                <span class="price-tag text-3xl font-bold text-green-300"
+                  >3€</span
+                >
+              </div>
+            </div>
+            <div
+              class="card rounded-lg p-6 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-16 h-16 flex items-center justify-center mb-4 bg-green-900 rounded-full"
+              >
+                <i class="ri-movie-line ri-xl"></i>
+              </div>
+              <h3 class="text-2xl font-semibold mb-3">Vidéo 13 min</h3>
+              <p class="mb-4 text-gray-300">
+                Montage professionnel de vidéos de durée moyenne avec
+                transitions et effets
+              </p>
+              <div class="mt-auto">
+                <span class="price-tag text-3xl font-bold text-green-300"
+                  >10€</span
+                >
+              </div>
+            </div>
+            <div
+              class="card rounded-lg p-6 flex flex-col items-center text-center"
+            >
+              <div
+                class="w-16 h-16 flex items-center justify-center mb-4 bg-green-900 rounded-full"
+              >
+                <i class="ri-film-line ri-xl"></i>
+              </div>
+              <h3 class="text-2xl font-semibold mb-3">Vidéo +15 min</h3>
+              <p class="mb-4 text-gray-300">
+                Projets complexes avec narration élaborée et édition avancée
+              </p>
+              <div class="mt-auto">
+                <span class="price-tag text-xl font-bold text-green-300"
+                  >Prix sur demande</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="experience" class="py-16 relative">
+        <div class="container mx-auto px-6">
+          <h2
+            class="crunch-chips text-4xl md:text-5xl font-bold mb-12 text-center text-green-300 glow-text"
+          >
+            MON EXPÉRIENCE
+          </h2>
+          <div class="card rounded-lg p-8 max-w-4xl mx-auto">
+            <div class="flex flex-col md:flex-row items-center gap-8 mb-10">
+              <div
+                class="w-24 h-24 flex items-center justify-center bg-green-900 rounded-full"
+              >
+                <i class="ri-video-edit-line ri-2x"></i>
+              </div>
+              <div>
+                <h3 class="text-2xl font-semibold mb-2">
+                  3 ans d'expérience en montage vidéo
+                </h3>
+                <p class="text-gray-300">
+                  Maîtrise des techniques avancées de montage, effets spéciaux
+                  et correction colorimétrique pour créer des contenus
+                  engageants et professionnels.
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div
+                class="p-4 bg-black bg-opacity-30 rounded-lg flex flex-col items-center text-center"
+              >
+                <div class="w-12 h-12 flex items-center justify-center mb-3">
+                  <i class="ri-scissors-cut-line ri-xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold mb-2">CapCut</h4>
+                <p class="text-sm text-gray-300">3 ans d'expérience</p>
+              </div>
+              <div
+                class="p-4 bg-black bg-opacity-30 rounded-lg flex flex-col items-center text-center"
+              >
+                <div class="w-12 h-12 flex items-center justify-center mb-3">
+                  <i class="ri-film-edit-line ri-xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold mb-2">Premiere Pro</h4>
+                <p class="text-sm text-gray-300">2 mois d'expérience</p>
+              </div>
+              <div
+                class="p-4 bg-black bg-opacity-30 rounded-lg flex flex-col items-center text-center"
+              >
+                <div class="w-12 h-12 flex items-center justify-center mb-3">
+                  <i class="ri-magic-line ri-xl"></i>
+                </div>
+                <h4 class="text-xl font-semibold mb-2">After Effects</h4>
+                <p class="text-sm text-gray-300">Débutant</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="contact" class="py-16 relative">
+        <div class="container mx-auto px-6">
+          <h2
+            class="crunch-chips text-4xl md:text-5xl font-bold mb-12 text-center text-green-300 glow-text"
+          >
+            ME CONTACTER
+          </h2>
+          <div class="card rounded-lg p-8 max-w-2xl mx-auto">
+            <div class="flex flex-col items-center text-center mb-8">
+              <p class="text-xl mb-6">
+                Intéressé par mes services ? N'hésitez pas à me contacter pour
+                discuter de votre projet !
+              </p>
+              <div class="flex items-center gap-3 mb-4">
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-green-900 rounded-full"
+                >
+                  <i class="ri-discord-line ri-lg"></i>
+                </div>
+                <span class="text-xl font-medium">shinzo_ytb0</span>
+              </div>
+              <a
+                href="https://www.youtube.com/channel/UCxxxxxxxxxx"
+                target="_blank"
+                class="flex items-center gap-3 mb-4 hover:text-green-300 transition-colors"
+              >
+                <div
+                  class="w-10 h-10 flex items-center justify-center bg-green-900 rounded-full"
+                >
+                  <i class="ri-youtube-line ri-lg"></i>
+                </div>
+                <span class="text-xl font-medium">Ma chaîne YouTube</span>
+              </a>
+            </div>
+            <form class="space-y-6">
+              <div>
+                <label for="name" class="block mb-2 text-sm font-medium"
+                  >Nom</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  class="w-full p-3 bg-black bg-opacity-50 border border-green-900 focus:border-green-500 rounded text-white"
+                  placeholder="Votre nom"
+                />
+              </div>
+              <div>
+                <label for="email" class="block mb-2 text-sm font-medium"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  class="w-full p-3 bg-black bg-opacity-50 border border-green-900 focus:border-green-500 rounded text-white"
+                  placeholder="Votre email"
+                />
+              </div>
+              <div>
+                <label for="message" class="block mb-2 text-sm font-medium"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  rows="4"
+                  class="w-full p-3 bg-black bg-opacity-50 border border-green-900 focus:border-green-500 rounded text-white"
+                  placeholder="Décrivez votre projet..."
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="btn-contact w-full bg-green-600 hover:bg-green-500 text-white py-3 !rounded-button whitespace-nowrap font-medium"
+              >
+                Envoyer le message
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="py-8 border-t border-green-900">
+      <div class="container mx-auto px-6 text-center">
+        <p class="text-gray-400">
+          © 2025 Shinzo - Monteur Vidéo Professionnel
+        </p>
+        <p class="text-gray-500 text-sm mt-2">17 Mai 2025</p>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+        const form = document.querySelector("form");
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const message = document.getElementById("message").value;
+          if (!name || !email || !message) {
+            showNotification("Veuillez remplir tous les champs", "error");
+            return;
+          }
+          const webhookURL =
+            "https://discord.com/api/webhooks/1373205332503040081/kEadayvIov882Jx1n6OkYWDSZZXGSwuEdQ6dYx9C7_qKM6ncGo7T3gDMe2zFgx-Dr6mp";
+          try {
+            const response = await fetch(webhookURL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                embeds: [
+                  {
+                    title: "Nouveau message de contact",
+                    color: 3066993,
+                    fields: [
+                      {
+                        name: "Nom",
+                        value: name,
+                        inline: true,
+                      },
+                      {
+                        name: "Email",
+                        value: email,
+                        inline: true,
+                      },
+                      {
+                        name: "Message",
+                        value: message,
+                      },
+                    ],
+                    timestamp: new Date().toISOString(),
+                  },
+                ],
+              }),
+            });
+            if (response.ok) {
+              showNotification("Message envoyé avec succès !", "success", name);
+              form.reset();
+            } else {
+              showNotification("Erreur lors de l'envoi du message", "error");
+            }
+          } catch (error) {
+            showNotification("Erreur lors de l'envoi du message", "error");
+          }
+        });
+        function showNotification(message, type, name = "") {
+          const notification = document.createElement("div");
+          if (type === "success" && name) {
+            const container = document.createElement("div");
+            container.className =
+              "fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50";
+            const content = document.createElement("div");
+            content.className =
+              "bg-green-600 p-8 rounded-lg shadow-2xl transform scale-0 transition-transform duration-500 text-center";
+            content.innerHTML = `
+                  <div class="text-4xl mb-4">🎉</div>
+                  <h3 class="text-2xl font-bold text-white mb-2">Merci ${name} !</h3>
+                  <p class="text-white">Votre message a été envoyé avec succès</p>
+              `;
+            container.appendChild(content);
+            document.body.appendChild(container);
+
+            setTimeout(() => (content.style.transform = "scale(1)"), 100);
+            setTimeout(() => {
+              content.style.transform = "scale(0)";
+              setTimeout(() => container.remove(), 500);
+            }, 2500);
+          } else {
+            notification.className = `fixed top-4 right-4 p-4 rounded shadow-lg ${type === "success" ? "bg-green-500" : "bg-red-500"} text-white`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
